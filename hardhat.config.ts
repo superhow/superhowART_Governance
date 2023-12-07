@@ -18,13 +18,21 @@ const config: HardhatUserConfig = {
   },
   networks: {
     polygon: {
-      url: process.env.POLYGON_RPC, // Polygon Mainnet RPC URL
-      accounts: [`${process.env.PRIVATE_KEY}`]
+      url: process.env.POLYGON_RPC, // Polygon Mainnet
+      accounts: [`0x${process.env.PRIVATE_KEY}`],
+      chainId: 137
     },
     mumbai: {
-      url: process.env.MUMBAI_RPC, // Polygon Testnet (Mumbai) RPC URL
-      accounts: [`${process.env.PRIVATE_KEY}`]
+      url: process.env.MUMBAI_RPC, // Polygon Testnet (Mumbai)
+      accounts: [`0x${process.env.PRIVATE_KEY}`],
+      chainId: 80001
     }
+  },
+
+  // Auction SC is using legecy code (openzeppelin newest version is no supporting Auction contracts)
+  // TODO: update Auction contracts
+  paths: {
+    sources: "./contracts/VilniusArt",
   },
 
 };

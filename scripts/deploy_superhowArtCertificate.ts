@@ -11,11 +11,6 @@ async function main() {
     // initialization
     await superhowArtCertificate.write.initialize([adminAddress, minterAddress]);
     console.log(`superhowArtCertificate deployed to: ${superhowArtCertificate.address}`);
-
-    // Example of sending a transaction (adjust according to your contract's methods)
-    const toAddress: string = "recipient_address_here"; // Replace with the recipient's address
-    const uri: string = "token_uri_here"; // Replace with the token URI
-    await superhowArtCertificate.write.safeMint([toAddress, uri]);
     
     // Wait for transaction receipt
     const publicClient = await hre.viem.getPublicClient();

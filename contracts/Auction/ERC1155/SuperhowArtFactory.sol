@@ -31,9 +31,9 @@ contract SuperhowArtFactory is
         name = _name;
         symbol = _symbol;
 
-        _setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
-        _setupRole(URI_SETTER_ROLE, msg.sender);
-        _setupRole(MINTER_ROLE, msg.sender);
+        _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
+        _grantRole(URI_SETTER_ROLE, msg.sender);
+        _grantRole(MINTER_ROLE, msg.sender);
     }
 
     function setURI(string memory newuri) public onlyRole(URI_SETTER_ROLE) {
