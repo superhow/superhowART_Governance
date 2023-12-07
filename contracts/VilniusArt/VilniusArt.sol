@@ -9,7 +9,7 @@ import "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol"
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 
 /// @custom:security-contact info@superhow.art
-contract superhowArtCertificate is
+contract SuperhowArtCertificate is
     Initializable,
     ERC721Upgradeable,
     ERC721EnumerableUpgradeable,
