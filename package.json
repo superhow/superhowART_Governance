@@ -6,6 +6,17 @@
   "repository": "https://github.com/superhow/superhowART_Governance.git",
   "author": "info@superhow.com",
   "license": "MIT",
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "deploy": "hardhat run scripts/deploy_superhowArtCertificate.ts",
+    "deploy:localhost": "hardhat run scripts/deploy_superhowArtCertificate.ts --network localhost",
+    "deploy:rinkeby": "hardhat run scripts/deploy_superhowArtCertificate.ts --network polygon",
+    "deploy:mainnet": "hardhat run scripts/deploy_superhowArtCertificate.ts --network mainnet",
+    "lint": "eslint '**/*.ts'",
+    "lint:fix": "eslint '**/*.ts' --fix",
+    "format": "prettier --write '**/*.{ts,js,json}'"
+  },
   "devDependencies": {
     "@nomicfoundation/hardhat-network-helpers": "^1.0.0",
     "@nomicfoundation/hardhat-toolbox-viem": "^2.0.0",
@@ -23,4 +34,5 @@
     "typescript": "~5.0.4",
     "viem": "^1.15.1"
   }
+
 }
