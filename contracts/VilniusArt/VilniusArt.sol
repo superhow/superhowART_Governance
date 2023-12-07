@@ -1,46 +1,24 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.20;
+pragma solidity ^0.8.20;
 
-import "@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/token/ERC721/extensions/ERC721EnumerableUpgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/token/ERC721/extensions/ERC721URIStorageUpgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/token/ERC721/extensions/ERC721BurnableUpgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Burnable.sol";
+import "@openzeppelin/contracts/access/AccessControl.sol";
 
-contract SuperhowArtCertificate is
-    Initializable,
-    ERC721Upgradeable,
-    ERC721EnumerableUpgradeable,
-    ERC721URIStorageUpgradeable,
-    ERC721BurnableUpgradeable,
-    AccessControlUpgradeable
-{
+contract SuperhowArtCertificate is ERC721, ERC721Enumerable, ERC721URIStorage, ERC721Burnable, AccessControl {
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
     uint256 private _nextTokenId;
 
-    constructor() {
-        _disableInitializers();
-    }
-
-    function initialize(
-        address defaultAdmin,
-        address minter
-    ) public initializer {
-        __ERC721_init("superhow ART Certificate", "ART");
-        __ERC721Enumerable_init();
-        __ERC721URIStorage_init();
-        __ERC721Burnable_init();
-        __AccessControl_init();
-
+    constructor(address defaultAdmin, address minter)
+        ERC721("superhow ART Certificate", "ART")
+    {
         _grantRole(DEFAULT_ADMIN_ROLE, defaultAdmin);
         _grantRole(MINTER_ROLE, minter);
     }
 
-    function safeMint(
-        address to,
-        string memory uri
-    ) public onlyRole(MINTER_ROLE) {
+    function safeMint(address to, string memory uri) public onlyRole(MINTER_ROLE) {
         uint256 tokenId = _nextTokenId++;
         _safeMint(to, tokenId);
         _setTokenURI(tokenId, uri);
@@ -48,47 +26,34 @@ contract SuperhowArtCertificate is
 
     // The following functions are overrides required by Solidity.
 
-    function _update(
-        address to,
-        uint256 tokenId,
-        address auth
-    )
+    function _update(address to, uint256 tokenId, address auth)
         internal
-        override(ERC721Upgradeable, ERC721EnumerableUpgradeable)
+        override(ERC721, ERC721Enumerable)
         returns (address)
     {
         return super._update(to, tokenId, auth);
     }
 
-    function _increaseBalance(
-        address account,
-        uint128 value
-    ) internal override(ERC721Upgradeable, ERC721EnumerableUpgradeable) {
+    function _increaseBalance(address account, uint128 value)
+        internal
+        override(ERC721, ERC721Enumerable)
+    {
         super._increaseBalance(account, value);
     }
 
-    function tokenURI(
-        uint256 tokenId
-    )
+    function tokenURI(uint256 tokenId)
         public
         view
-        override(ERC721Upgradeable, ERC721URIStorageUpgradeable)
+        override(ERC721, ERC721URIStorage)
         returns (string memory)
     {
         return super.tokenURI(tokenId);
     }
 
-    function supportsInterface(
-        bytes4 interfaceId
-    )
+    function supportsInterface(bytes4 interfaceId)
         public
         view
-        override(
-            ERC721Upgradeable,
-            ERC721EnumerableUpgradeable,
-            ERC721URIStorageUpgradeable,
-            AccessControlUpgradeable
-        )
+        override(ERC721, ERC721Enumerable, ERC721URIStorage, AccessControl)
         returns (bool)
     {
         return super.supportsInterface(interfaceId);

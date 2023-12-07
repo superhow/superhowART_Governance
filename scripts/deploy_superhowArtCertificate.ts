@@ -1,27 +1,43 @@
 import hre from "hardhat";
+import { Address } from 'viem';
 
 async function main() {
-    // deployment
-    const superhowArtCertificate = await hre.viem.deployContract("superhowArtCertificate", []);
+    console.log("Starting deployment of SuperhowARTCertificate...");
+
+    const adminAddress = process.env.ADMIN_ADDRESS as Address;
+    const minterAddress = process.env.MINTER_ADDRESS as Address;
+
+    // Deployment with constructor parameters
+    const superhowArtCertificate = await hre.viem.deployContract("SuperhowArtCertificate", [adminAddress, minterAddress]);
+    console.log(`SuperhowArtCertificate deployed to: ${superhowArtCertificate.address}`);
+
+    console.log("Deployment of SuperhowARTCertificate completed successfully.");
+
+    // Call the mintNft function to mint an NFT
+    await mintNft(superhowArtCertificate.address);
+}
+
+async function mintNft(contractAddress: Address) {
+    console.log("Starting the minting process...");
 
 
-    const adminAddress: string = "0x";
-    const minterAddress: string = "0x";
+    const recipientAddress = "0xCaf97E2892e3D1490697E5fcc77Cdc9908089f1c" as Address;
+    const tokenURI = "https://ipfs.io/ipfs/QmXZSGMWoMkmupXkAHdogYLtQTsnDBzSJnZtXXegefPcH5" as string;
 
-    // initialization
-    await superhowArtCertificate.write.initialize([adminAddress, minterAddress]);
-    console.log(`superhowArtCertificate deployed to: ${superhowArtCertificate.address}`);
-    
-    // Wait for transaction receipt
-    const publicClient = await hre.viem.getPublicClient();
-    await publicClient.waitForTransactionReceipt({ hash });
+    // Get the contract instance
+    const superhowArtCertificate = await hre.viem.getContractAt("SuperhowArtCertificate", contractAddress);
 
-    console.log("Token minted successfully");
+    console.log(`Minting NFT to ${recipientAddress}`);
+
+    // Mint the NFT
+    await superhowArtCertificate.write.safeMint([recipientAddress, tokenURI]);
+
+    console.log(`NFT minted successfully to ${recipientAddress}`);
 }
 
 main()
     .then(() => process.exit(0))
     .catch((error) => {
-        console.error(error);
+        console.error("Error in deployment process:", error);
         process.exit(1);
     });

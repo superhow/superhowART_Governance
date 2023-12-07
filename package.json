@@ -9,10 +9,9 @@
   "scripts": {
     "build": "hardhat compile",
     "test": "hardhat test",
-    "deploy": "hardhat run scripts/deploy_superhowArtCertificate.ts",
-    "deploy:localhost": "hardhat run scripts/deploy_superhowArtCertificate.ts --network localhost",
-    "deploy:rinkeby": "hardhat run scripts/deploy_superhowArtCertificate.ts --network polygon",
-    "deploy:mainnet": "hardhat run scripts/deploy_superhowArtCertificate.ts --network mainnet",
+    "deploy:local": "hardhat run scripts/deploy_superhowArtCertificate.ts --network localhost",
+    "deploy:mumbai": "hardhat run scripts/deploy_superhowArtCertificate.ts --network mumbai",
+    "deploy:polygon": "hardhat run scripts/deploy_superhowArtCertificate.ts --network polygon",
     "lint": "eslint '**/*.ts'",
     "lint:fix": "eslint '**/*.ts' --fix",
     "format": "prettier --write '**/*.{ts,js,json}'"
@@ -21,7 +20,7 @@
     "@nomicfoundation/hardhat-network-helpers": "^1.0.0",
     "@nomicfoundation/hardhat-toolbox-viem": "^2.0.0",
     "@nomicfoundation/hardhat-verify": "^2.0.0",
-    "@nomicfoundation/hardhat-viem": "^1.0.0",
+    "@nomicfoundation/hardhat-viem": "^1.0.1",
     "@types/chai": "^4.2.0",
     "@types/chai-as-promised": "^7.1.6",
     "@types/mocha": ">=9.1.0",
@@ -32,12 +31,15 @@
     "solidity-coverage": "^0.8.0",
     "ts-node": ">=8.0.0",
     "typescript": "~5.0.4",
-    "viem": "^1.15.1"
+    "viem": "^1.19.11"
   },
   "dependencies": {
+    "@nomicfoundation/hardhat-ethers": "^3.0.5",
     "@nomiclabs/hardhat-ethers": "^2.2.3",
     "@openzeppelin/contracts": "^5.0.0",
     "@openzeppelin/contracts-upgradeable": "^5.0.0",
-    "dotenv": "^16.3.1"
+    "@openzeppelin/hardhat-upgrades": "^2.5.0",
+    "dotenv": "^16.3.1",
+    "ethers": "^6.9.0"
   }
 }
