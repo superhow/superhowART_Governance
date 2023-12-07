@@ -1,0 +1,25 @@
+{
+    "name": "Alexa, 2022",
+    "description": "Artwork by Monika Plentauskaitė, showcased at MENO NIŠA Gallery, Vilnius.",
+    "attributes": [
+      {
+        "trait_type": "Artist",
+        "value": "Monika Plentauskaitė"
+      },
+      {
+        "trait_type": "Gallery",
+        "value": "MENO NIŠA (Vilnius)"
+      },
+      {
+        "display_type": "date",
+        "trait_type": "Year",
+        "value": 2022
+      }
+    ],
+    "owner_info": {
+      "firstName": "Ieva",
+      "lastName": "Mikutavičiūtė",
+      "email": "ieva.miku@gmail.com",
+      "wallet_address": "0xCaf97E2892e3D1490697E5fcc77Cdc9908089f1c"
+    }
+  }
