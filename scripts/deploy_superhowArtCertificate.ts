@@ -21,8 +21,8 @@ async function mintNft(contractAddress: Address) {
     console.log("Starting the minting process...");
 
 
-    const recipientAddress = "0xCaf97E2892e3D1490697E5fcc77Cdc9908089f1c" as Address;
-    const tokenURI = "https://ipfs.io/ipfs/QmXZSGMWoMkmupXkAHdogYLtQTsnDBzSJnZtXXegefPcH5" as string;
+    const recipientAddress = process.env.RECIPIENT_ADDRESS as Address;
+    const tokenURI = process.env.TOKEN_URI as string;
 
     // Get the contract instance
     const superhowArtCertificate = await hre.viem.getContractAt("SuperhowArtCertificate", contractAddress);
